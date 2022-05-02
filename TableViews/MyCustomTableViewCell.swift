@@ -19,6 +19,8 @@ class MyCustomTableViewCell: UITableViewCell {
         myFirstLabel.font = UIFont.boldSystemFont(ofSize: 20)
         myFirstLabel.textColor = .blue
         
+        mySecondLabel.numberOfLines = 0 //Esta operacion hace que el nombre de la celda sea infinito 
+        
         backgroundColor = .gray
     }
 //Esta operacion encadena una accion en pantalla

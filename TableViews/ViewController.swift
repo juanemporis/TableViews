@@ -42,7 +42,7 @@ extension ViewController : UITableViewDataSource{
         if indexPath.section == 0 {
             return 50
         }
-        return 150
+        return UITableView.automaticDimension  //Esta operacion creara celdas de altura dinamica 
     }
     
     //Esta operacion va a definir el contenido de cada una de las celdas
@@ -66,8 +66,14 @@ extension ViewController : UITableViewDataSource{
             
             cell?.myFirstLabel.text = String(indexPath.row + 1)
             cell!.mySecondLabel.text = myCountries[indexPath.row]
-            return cell!
+        
+        //Con esta operacion se modifica el nombre de los paises el indexpath == 2 indica el pais de peru 
+        if indexPath.row == 2 {
+            cell!.mySecondLabel.text = "sfddsfdsfsdfdsnjkfhdsfbdsjkfhjdsbfhjddjafhsdjkfjksdhfkjsdhfkjsdhfkjhdsjkfhsdkjhfkjdshfjkhdskjfhsdjhfksdjhfkjsdhfjkdhkjfhdjskhfkjsdhfk"
    }
+        return cell!
+
+    }
 }
 
 extension ViewController: UITableViewDelegate{
