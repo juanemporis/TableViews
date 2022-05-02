@@ -20,6 +20,9 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
+        //Nuestra tabla podra pintar seran de MyCustomTableViewCell
+        tableView.register(UINib(nibName: "MyCustomTableViewCell", bundle: nil), forCellReuseIdentifier: "mycustomcell")
     }
 
  
@@ -33,11 +36,18 @@ extension ViewController : UITableViewDataSource{
 }
     //Esta operacion podremos decirle cuantas secciones tendra neustra tabla
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 50
+        }
+        return 150
     }
     
     //Esta operacion va a definir el contenido de cada una de las celdas
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
         var cell = tableView.dequeueReusableCell(withIdentifier: "mycell")
         if cell == nil{
             //Esta operacion se encargara de modificar las las celdas
@@ -46,10 +56,18 @@ extension ViewController : UITableViewDataSource{
             cell?.textLabel?.font = UIFont.systemFont(ofSize: 20)//Esta operacion modifica el tamaño de letra
             cell?.accessoryType = .disclosureIndicator//Esta operacion te muestra una flecha de cambio de pantalla
         }
-        
+    
         cell!.textLabel?.text = myCountries[indexPath.row]
         return cell!
-    }
+        }
+           
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mycustomcell", for: indexPath) as?
+            MyCustomTableViewCell
+            
+            cell?.myFirstLabel.text = String(indexPath.row + 1)
+            cell!.mySecondLabel.text = myCountries[indexPath.row]
+            return cell!
+   }
 }
 
 extension ViewController: UITableViewDelegate{
