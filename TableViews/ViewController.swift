@@ -19,7 +19,6 @@ class ViewController: UIViewController {
         //DataSource indica que elementos va a tener nuestra tabla
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.tableFooterView = UIView()
         
         //Nuestra tabla podra pintar seran de MyCustomTableViewCell
         tableView.register(UINib(nibName: "MyCustomTableViewCell", bundle: nil), forCellReuseIdentifier: "mycustomcell")
@@ -29,6 +28,26 @@ class ViewController: UIViewController {
 }
 
 extension ViewController : UITableViewDataSource{
+    //Esta operacion pondra Sub Titulos en la cabecera de ambas celdas
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Celdas simples"
+        }
+        return "Celdas Custom"
+    }
+   
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            return "Footer para Celdas Simples"
+        }
+        return "Footer para seldas Custom"
+    }
+    
+    
     //Esta operacion indicara cuantas celdas debera tener nuestra tabla
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myCountries.count  //Esta operacion agregara un pais cada que se agregue uno en myCountries
